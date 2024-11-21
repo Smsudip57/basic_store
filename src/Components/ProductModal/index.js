@@ -201,7 +201,7 @@ const ProductModal = (props) => {
                                     {
                                         props?.data?.productRam?.map((item, index) => {
                                             return (
-                                                <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                <li className='list-inline-item' key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                             )
                                         })
                                     }
@@ -219,7 +219,7 @@ const ProductModal = (props) => {
                                     {
                                         props?.data?.size?.map((item, index) => {
                                             return (
-                                                <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                <li className='list-inline-item' key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                             )
                                         })
                                     }
@@ -237,7 +237,7 @@ const ProductModal = (props) => {
                                     {
                                         props?.data?.productWeight?.map((item, index) => {
                                             return (
-                                                <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                <li className='list-inline-item' key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                             )
                                         })
                                     }

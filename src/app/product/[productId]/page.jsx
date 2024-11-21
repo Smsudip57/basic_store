@@ -318,7 +318,7 @@ const ProductDetails = ({params}) => {
                                         {
                                             productData?.productRam?.map((item, index) => {
                                                 return (
-                                                    <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                    <li className='list-inline-item' key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                                 )
                                             })
                                         }
@@ -336,7 +336,7 @@ const ProductDetails = ({params}) => {
                                         {
                                             productData?.size?.map((item, index) => {
                                                 return (
-                                                    <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                    <li className='list-inline-item' key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                                 )
                                             })
                                         }
@@ -354,7 +354,8 @@ const ProductDetails = ({params}) => {
                                         {
                                             productData?.productWeight?.map((item, index) => {
                                                 return (
-                                                    <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                    <li className='list-inline-item'
+                                                        key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                                 )
                                             })
                                         }

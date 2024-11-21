@@ -349,7 +349,7 @@ const Checkout = () => {
                                             {
                                                 cartData?.length !== 0 && cartData?.map((item, index) => {
                                                     return (
-                                                        <tr>
+                                                        <tr key={index}>
                                                             <td>{item?.productTitle?.substr(0, 20) + '...'}  <b>× {item?.quantity}</b></td>
 
                                                             <td> 

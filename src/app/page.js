@@ -171,6 +171,7 @@ export default function Home() {
                     {context.categoryData?.map((item, index) => {
                       return (
                         <Tab
+                          key={index}
                           className="item"
                           label={item.name}
                           onClick={() => selectCat(item.name)}

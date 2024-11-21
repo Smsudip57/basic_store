@@ -98,7 +98,7 @@ const MyList = () => {
                                                     {
                                                         myListData?.length !== 0 && myListData?.map((item, index) => {
                                                             return (
-                                                                <tr>
+                                                                <tr key={index}>
                                                                     <td width="50%">
                                                                         <Link href={`/product/${item?.productId}`}>
                                                                             <div className="d-flex align-items-center cartItemimgWrapper">

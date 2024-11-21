@@ -145,7 +145,7 @@ const Orders = () => {
                             {
                                 products?.length !== 0 && products?.map((item, index) => {
                                     return (
-                                        <tr>
+                                        <tr key={index}>
                                             <td>{item?.productId}</td>
                                             <td  style={{whiteSpace:"inherit"}}><span>
                                                 {item?.productTitle?.substr(0,30)+'...'}

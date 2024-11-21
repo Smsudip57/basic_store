@@ -64,7 +64,7 @@ const ProductZoom = (props) => {
             {
                 props?.images?.map((img, index) => {
                     return (
-                        <SwiperSlide>
+                        <SwiperSlide key={index}>
                         <div className={`item ${slideIndex === index && 'item_active'}`} key={index}>
                             <img src={img} className='w-100' onClick={() => goto(index)} />
                         </div>
