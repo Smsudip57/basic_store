@@ -223,7 +223,7 @@ const SignUp = () => {
       <div className="container">
         <div className="box card p-3 shadow border-0">
           <div className="text-center">
-            <Image src={Logo} alt="image" />
+            <Image src={Logo} alt="image" style={{ borderRadius: "50%" }}  />
           </div>
 
           <form className="mt-2" onSubmit={register}>

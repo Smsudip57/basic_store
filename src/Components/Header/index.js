@@ -100,7 +100,7 @@ const Header = () => {
               <div className="row">
                 <div className="logoWrapper d-flex align-items-center col-sm-2">
                   <Link href={"/"}>
-                    <Image src={Logo} alt="Logo" />
+                    <Image src={Logo} alt="Logo"  style={{ borderRadius: "50%" }} />
                   </Link>
                 </div>
 
