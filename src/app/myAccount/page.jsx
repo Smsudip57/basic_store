@@ -106,10 +106,6 @@ const MyAccount = () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     fetchDataFromApi(`/api/user/${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
       setUserData(res);
       setPreviews(res.images);
 
@@ -178,10 +174,6 @@ const MyAccount = () => {
     }
 
     uploadImage(apiEndPoint, formdata).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
       fetchDataFromApi("/api/imageUpload").then((response) => {
         if (
           response !== undefined &&
@@ -211,10 +203,6 @@ const MyAccount = () => {
           const user = JSON.parse(localStorage.getItem("user"));
 
           fetchDataFromApi(`/api/user/${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             const data = {
               name: res?.name,
               email: res?.email,
@@ -224,10 +212,6 @@ const MyAccount = () => {
             };
 
             editData(`/api/user/${user?.userId}`, data).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
               setTimeout(() => {
                 setUploading(false);
                 img_arr = [];
@@ -270,10 +254,6 @@ const MyAccount = () => {
       const user = JSON.parse(localStorage.getItem("user"));
 
       editData(`/api/user/${user?.userId}`, formFields).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
         // console.log(res);
         setIsLoading(false);
 
@@ -324,10 +304,6 @@ const MyAccount = () => {
 
         editData(`/api/user/changePassword/${user.userId}`, data).then(
           (res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
            
           }
         );

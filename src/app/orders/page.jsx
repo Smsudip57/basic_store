@@ -30,10 +30,6 @@ const Orders = () => {
 
         const user = JSON.parse(localStorage.getItem("user"));
         fetchDataFromApi(`/api/orders?userid=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             setOrders(res);
         })
 
@@ -44,10 +40,6 @@ const Orders = () => {
 
     const showProducts = (id) => {
         fetchDataFromApi(`/api/orders/${id}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             setIsOpenModal(true);
             setproducts(res.products);
         })
@@ -145,7 +137,7 @@ const Orders = () => {
                             {
                                 products?.length !== 0 && products?.map((item, index) => {
                                     return (
-                                        <tr key={index}>
+                                        <tr>
                                             <td>{item?.productId}</td>
                                             <td  style={{whiteSpace:"inherit"}}><span>
                                                 {item?.productTitle?.substr(0,30)+'...'}

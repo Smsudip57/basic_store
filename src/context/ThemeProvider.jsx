@@ -22,7 +22,7 @@ const ThemeProvider = ({ children }) => {
   const [cartData, setCartData] = useState();
   const [searchData, setSearchData] = useState([]);
   const [isOpenNav, setIsOpenNav] = useState(false);
-  const [windowWidth, setWindowWidth] = useState();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const [alertBox, setAlertBox] = useState({
     msg: '',
@@ -36,16 +36,6 @@ const ThemeProvider = ({ children }) => {
     userId: ""
   })
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-
-    // Add the event listener when the component mounts
-    window.addEventListener('resize', handleResize);
-
-    // Clean up the event listener when the component unmounts
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
 
 
   useEffect(() => {
@@ -53,10 +43,6 @@ const ThemeProvider = ({ children }) => {
 
 
     fetchDataFromApi("/api/category").then((res) => {
-        if (!res.ok) {
-         
-          return; 
-        }
       setCategoryData(res.categoryList);
     })
 
@@ -64,10 +50,6 @@ const ThemeProvider = ({ children }) => {
 
     const user = JSON.parse(localStorage.getItem("user"));
     fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-         
-          return; 
-        }
       setCartData(res)
     });
 
@@ -94,10 +76,6 @@ const ThemeProvider = ({ children }) => {
   const getCartData = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-         
-          return; 
-        }
       setCartData(res)
     });
   }
@@ -121,10 +99,6 @@ const ThemeProvider = ({ children }) => {
 
   const openProductDetailsModal = (id, status) => {
     fetchDataFromApi(`/api/products/${id}`).then((res) => {
-        if (!res.ok) {
-         
-          return; 
-        }
       setProductData(res);
       setisOpenProductModal(status);
     })
@@ -132,10 +106,6 @@ const ThemeProvider = ({ children }) => {
 
   const getCountry = async (url) => {
     const responsive = await axios.get(url).then((res) => {
-        if (!res.ok) {
-         
-          return; 
-        }
       setCountryList(res.data.data)
     })
   }
@@ -155,10 +125,6 @@ const ThemeProvider = ({ children }) => {
     if(isLogin===true){
       setAddingInCart(true);
       postData(`/api/cart/add`, data).then((res) => {
-        if (!res.ok) {
-         
-          return; 
-        }
         if (res.status !== false) {
           setAlertBox({
             open: true,

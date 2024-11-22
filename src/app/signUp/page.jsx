@@ -87,10 +87,6 @@ const SignUp = () => {
 
       postData("/api/user/signup", formfields)
         .then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
           if (res.error !== true) {
             context.setAlertBox({
               open: true,
@@ -139,10 +135,6 @@ const SignUp = () => {
         };
 
         postData("/api/user/authWithGoogle", fields).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
           try {
             if (res.error !== true) {
               localStorage.setItem("token", res.token);

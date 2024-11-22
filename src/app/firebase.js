@@ -5,13 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA06BERjoj2Tq15mNY_qhHYjLLyW9OFSBI",
-  authDomain: "webme-b47a1.firebaseapp.com",
-  projectId: "webme-b47a1",
-  storageBucket: "webme-b47a1.firebasestorage.app",
-  messagingSenderId: "860331899439",
-  appId: "1:860331899439:web:2111cc237b4a12ae3864da",
-  measurementId: "G-ZHKMSFK1SR"
+  apiKey: process.env.NEXT_PUBLIC_APP_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_FIREBASE_APP_ID
 };
 
 // Initialize Firebase

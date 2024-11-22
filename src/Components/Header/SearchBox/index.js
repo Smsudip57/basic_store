@@ -26,10 +26,6 @@ const SearchBox = (props) => {
         if(searchFields!==""){
             setIsLoading(true);
             fetchDataFromApi(`/api/search?q=${searchFields}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
                 context.setSearchData(res);
                 setTimeout(() => {
                     setIsLoading(false);

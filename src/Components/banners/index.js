@@ -81,7 +81,7 @@ const Banners = (props) => {
             {props?.data?.length !== 0 &&
               props?.data?.map((item, index) => {
                 return (
-                  <div className={`col_`} key={index}>
+                  <div className={`col_`}>
                       {item?.subCatId !== null ? (
                         <Link
                           href={`/category/subCat/${item?.subCatId}`}

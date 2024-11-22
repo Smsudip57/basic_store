@@ -32,7 +32,6 @@ export const postData = async (url, formData) => {
             return data;
         } else {
             const errorData = await response.json();
-            
             return errorData;
         }
 

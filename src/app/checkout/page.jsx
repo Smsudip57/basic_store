@@ -31,10 +31,6 @@ const Checkout = () => {
         window.scrollTo(0,0)
         const user = JSON.parse(localStorage.getItem("user"));
         fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             setCartData(res);
 
             setTotalAmount(res.length !== 0 &&
@@ -196,21 +192,9 @@ const Checkout = () => {
 
 
                  postData(`/api/orders/create`, payLoad).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
              fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             res?.length!==0 && res?.map((item)=>{
                 deleteData(`/api/cart/${item?.id}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
                 })    
             })
                 setTimeout(()=>{
@@ -349,7 +333,7 @@ const Checkout = () => {
                                             {
                                                 cartData?.length !== 0 && cartData?.map((item, index) => {
                                                     return (
-                                                        <tr key={index}>
+                                                        <tr>
                                                             <td>{item?.productTitle?.substr(0, 20) + '...'}  <b>× {item?.quantity}</b></td>
 
                                                             <td> 

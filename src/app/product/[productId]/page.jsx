@@ -45,10 +45,6 @@ const ProductDetails = ({params}) => {
         window.scrollTo(0, 0);
         setActiveSize(null);
         fetchDataFromApi(`/api/products/${id}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             setProductData(res);
 
             if (res?.productRam.length === 0 && res?.productWeight.length === 0 && res?.size.length === 0) {
@@ -57,10 +53,6 @@ const ProductDetails = ({params}) => {
 
             fetchDataFromApi(`/api/products?subCatId=${res?.subCatId}`)
                 .then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
                     const filteredData = res?.products?.filter(item => item.id !== id);
                     setRelatedProductData(filteredData)
                 })
@@ -71,10 +63,6 @@ const ProductDetails = ({params}) => {
 
 
         fetchDataFromApi(`/api/productReviews?productId=${id}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             setreviewsData(res)
         })
 
@@ -82,10 +70,6 @@ const ProductDetails = ({params}) => {
         const user = JSON.parse(localStorage.getItem("user"));
 
         fetchDataFromApi(`/api/my-list?productId=${id}&userId=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             if (res.length !== 0) {
                 setSsAddedToMyList(true);
             }
@@ -127,10 +111,6 @@ const ProductDetails = ({params}) => {
         setIsLoading(true);
 
         postData("/api/productReviews/add", reviews).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             setIsLoading(false);
 
             reviews.customerRating = 1;
@@ -141,10 +121,6 @@ const ProductDetails = ({params}) => {
             })
 
             fetchDataFromApi(`/api/productReviews?productId=${id}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
                 setreviewsData(res);
             })
         })
@@ -208,10 +184,6 @@ const ProductDetails = ({params}) => {
                 userId: user?.userId
             }
             postData(`/api/my-list/add/`, data).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
                 if (res.status !== false) {
                     context.setAlertBox({
                         open: true,
@@ -221,10 +193,6 @@ const ProductDetails = ({params}) => {
 
             
                     fetchDataFromApi(`/api/my-list?productId=${id}&userId=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
                         if (res.length !== 0) {
                             setSsAddedToMyList(true);
                         }
@@ -318,7 +286,7 @@ const ProductDetails = ({params}) => {
                                         {
                                             productData?.productRam?.map((item, index) => {
                                                 return (
-                                                    <li className='list-inline-item' key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                    <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                                 )
                                             })
                                         }
@@ -336,7 +304,7 @@ const ProductDetails = ({params}) => {
                                         {
                                             productData?.size?.map((item, index) => {
                                                 return (
-                                                    <li className='list-inline-item' key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                    <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                                 )
                                             })
                                         }
@@ -354,8 +322,7 @@ const ProductDetails = ({params}) => {
                                         {
                                             productData?.productWeight?.map((item, index) => {
                                                 return (
-                                                    <li className='list-inline-item'
-                                                        key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                    <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                                 )
                                             })
                                         }

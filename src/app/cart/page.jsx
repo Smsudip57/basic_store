@@ -40,10 +40,6 @@ const Cart = () => {
 
         const user = JSON.parse(localStorage.getItem("user"));
         fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             setCartData(res);
             setselectedQuantity(res?.quantity)
         })
@@ -71,18 +67,10 @@ const Cart = () => {
             //console.log(item?._id)
 
             editData(`/api/cart/${item?._id}`, cartFields).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
                 setTimeout(() => {
                     setIsLoading(false);
                     const user = JSON.parse(localStorage.getItem("user"));
                     fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
                         setCartData(res);
                     })
                 }, 1000)
@@ -95,10 +83,6 @@ const Cart = () => {
     const removeItem = (id) => {
         setIsLoading(true);
         deleteData(`/api/cart/${id}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             context.setAlertBox({
                 open: true,
                 error: false,
@@ -107,10 +91,6 @@ const Cart = () => {
 
             const user = JSON.parse(localStorage.getItem("user"));
             fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
                 setCartData(res);
                 setIsLoading(false);
             })
@@ -149,7 +129,7 @@ const Cart = () => {
                                                 {
                                                     cartData?.length !== 0 && cartData?.map((item, index) => {
                                                         return (
-                                                            <tr key={index}>
+                                                            <tr>
                                                                 <td width="35%">
                                                                     <Link href={`/product/${item?.productId}`}>
                                                                         <div className="d-flex align-items-center cartItemimgWrapper">

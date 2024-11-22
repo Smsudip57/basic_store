@@ -34,10 +34,6 @@ const MyList = () => {
         
         const user = JSON.parse(localStorage.getItem("user"));
         fetchDataFromApi(`/api/my-list?userId=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             setmyListData(res);
         })
     }, []);
@@ -46,10 +42,6 @@ const MyList = () => {
     const removeItem = (id) => {
         setIsLoading(true);
         deleteData(`/api/my-list/${id}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             context.setAlertBox({
                 open: true,
                 error: false,
@@ -58,10 +50,6 @@ const MyList = () => {
 
             const user = JSON.parse(localStorage.getItem("user"));
             fetchDataFromApi(`/api/my-list?userId=${user?.userId}`).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
                 setmyListData(res);
                 setIsLoading(false);
             })
@@ -98,7 +86,7 @@ const MyList = () => {
                                                     {
                                                         myListData?.length !== 0 && myListData?.map((item, index) => {
                                                             return (
-                                                                <tr key={index}>
+                                                                <tr>
                                                                     <td width="50%">
                                                                         <Link href={`/product/${item?.productId}`}>
                                                                             <div className="d-flex align-items-center cartItemimgWrapper">

@@ -64,10 +64,6 @@ const SignIn = () => {
 
     setIsLoading(true);
     postData("/api/user/signin", formfields).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
       try {
         if (res.error !== true) {
           localStorage.setItem("token", res.token);
@@ -126,10 +122,6 @@ const SignIn = () => {
         }
 
         postData("/api/user/authWithGoogle", fields).then((res) => {
-        if (!res.ok) {
-          setIsLoading(false);
-          return; 
-        }
             try {
               if (res.error !== true) {
                 localStorage.setItem("token", res.token);
