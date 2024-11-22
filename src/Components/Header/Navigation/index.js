@@ -51,7 +51,7 @@ const Navigation = (props) => {
                 <ul>
                   {props.navData?.map((item, index) => {
                     return (
-                      <li>
+                      <li key={index}>
                         <Link href={`/category/${item?._id}`}>
                           <Button>
                             {item?.name} <FaAngleRight className="ml-auto" />
@@ -118,7 +118,7 @@ const Navigation = (props) => {
                 .filter((item, idx) => idx < 8)
                 .map((item, index) => {
                   return (
-                    <li className="list-inline-item">
+                    <li className="list-inline-item" key={index}>
                       <Link
                         href={`/category/${item?._id}`}
                         onClick={props.closeNav}

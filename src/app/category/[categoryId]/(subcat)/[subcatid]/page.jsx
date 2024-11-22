@@ -50,6 +50,7 @@ const Listing = ({ params }) => {
 
         setisLoading(true);
         fetchDataFromApi(`${apiEndPoint}`).then((res) => {
+        
             setProductData(res)
             setisLoading(false);
         })
@@ -66,6 +67,7 @@ const Listing = ({ params }) => {
         setisLoading(true);
 
         fetchDataFromApi(`/api/products/catId?catId=${catId}&location=${localStorage.getItem("location")}&page=1&perPage=8`).then((res) => {
+        
             setProductData(res);
             setisLoading(false);
         })
@@ -77,6 +79,7 @@ const Listing = ({ params }) => {
         if (filterId === "") {
             if (subCatId !== "" && subCatId !== null && subCatId !== undefined) {
                 fetchDataFromApi(`/api/products/fiterByPrice?minPrice=${price[0]}&maxPrice=${price[1]}&subCatId=${subCatId}&location=${localStorage.getItem("location")}&page=1&perPage=8`).then((res) => {
+        
                     setProductData(res)
                     setisLoading(false);
                     // window.scrollTo({
@@ -89,6 +92,7 @@ const Listing = ({ params }) => {
 
         if (filterId !== "") {
             fetchDataFromApi(`/api/products/fiterByPrice?minPrice=${price[0]}&maxPrice=${price[1]}&subCatId=${subCatId}&location=${localStorage.getItem("location")}&page=1&perPage=8`).then((res) => {
+        
                 setProductData(res)
                 setisLoading(false);
                 // window.scrollTo({
@@ -110,6 +114,7 @@ const Listing = ({ params }) => {
 
         if (subCatId !== "" && subCatId !== null && subCatId !== undefined) {
             fetchDataFromApi(`/api/products/rating?rating=${rating}&subCatId=${subCatId}&location=${localStorage.getItem("location")}&page=1&perPage=8`).then((res) => {
+        
                 setProductData(res)
                 setisLoading(false);
             })
@@ -125,6 +130,7 @@ const Listing = ({ params }) => {
             behavior: 'smooth',
         })
         fetchDataFromApi(`/api/products?subCatId=${id}&page=${value}&perPage=6&location=${localStorage.getItem("location")}`).then((res) => {
+        
             setProductData(res);
             setisLoading(false);
         })

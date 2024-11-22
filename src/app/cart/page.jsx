@@ -40,6 +40,7 @@ const Cart = () => {
 
         const user = JSON.parse(localStorage.getItem("user"));
         fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
+        
             setCartData(res);
             setselectedQuantity(res?.quantity)
         })
@@ -67,10 +68,12 @@ const Cart = () => {
             //console.log(item?._id)
 
             editData(`/api/cart/${item?._id}`, cartFields).then((res) => {
+        
                 setTimeout(() => {
                     setIsLoading(false);
                     const user = JSON.parse(localStorage.getItem("user"));
                     fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
+        
                         setCartData(res);
                     })
                 }, 1000)
@@ -83,6 +86,7 @@ const Cart = () => {
     const removeItem = (id) => {
         setIsLoading(true);
         deleteData(`/api/cart/${id}`).then((res) => {
+        
             context.setAlertBox({
                 open: true,
                 error: false,
@@ -91,6 +95,7 @@ const Cart = () => {
 
             const user = JSON.parse(localStorage.getItem("user"));
             fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
+        
                 setCartData(res);
                 setIsLoading(false);
             })
@@ -129,7 +134,7 @@ const Cart = () => {
                                                 {
                                                     cartData?.length !== 0 && cartData?.map((item, index) => {
                                                         return (
-                                                            <tr>
+                                                            <tr key={index}>
                                                                 <td width="35%">
                                                                     <Link href={`/product/${item?.productId}`}>
                                                                         <div className="d-flex align-items-center cartItemimgWrapper">

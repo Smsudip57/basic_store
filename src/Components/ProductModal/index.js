@@ -34,6 +34,7 @@ const ProductModal = (props) => {
         const user = JSON.parse(localStorage.getItem("user"));
 
         fetchDataFromApi(`/api/my-list?productId=${props?.data?.id}&userId=${user?.userId}`).then((res) => {
+        
             if (res.length !== 0) {
                 setSsAddedToMyList(true);
             }
@@ -67,10 +68,12 @@ const ProductModal = (props) => {
     //         //console.log(item?._id)
 
     //         editData(`/api/cart/${item?._id}`, cartFields).then((res) => {
+        
     //             setTimeout(() => {
     //                 setIsLoading(false);
     //                 const user = JSON.parse(localStorage.getItem("user"));
     //                 fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
+        
     //                     setCartData(res);
     //                 })
     //             }, 1000)
@@ -116,6 +119,7 @@ const ProductModal = (props) => {
                 userId: user?.userId
             }
             postData(`/api/my-list/add/`, data).then((res) => {
+        
                 if (res.status !== false) {
                     context.setAlertBox({
                         open: true,
@@ -185,7 +189,7 @@ const ProductModal = (props) => {
                                     {
                                         props?.data?.productRam?.map((item, index) => {
                                             return (
-                                                <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                <li className='list-inline-item' key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                             )
                                         })
                                     }
@@ -203,7 +207,7 @@ const ProductModal = (props) => {
                                     {
                                         props?.data?.size?.map((item, index) => {
                                             return (
-                                                <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                <li className='list-inline-item' key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                             )
                                         })
                                     }
@@ -221,7 +225,7 @@ const ProductModal = (props) => {
                                     {
                                         props?.data?.productWeight?.map((item, index) => {
                                             return (
-                                                <li className='list-inline-item'><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
+                                                <li className='list-inline-item' key={index}><a className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>{item}</a></li>
                                             )
                                         })
                                     }

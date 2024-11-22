@@ -27,6 +27,10 @@ const Footer = () => {
 
     useEffect(()=>{
         fetchDataFromApi("/api/banners").then((res) => {
+        if (res!==undefined) {
+         
+          return; 
+        }
             setBannerList(res);
           });
     },[]);

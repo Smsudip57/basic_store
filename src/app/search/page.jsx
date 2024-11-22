@@ -51,6 +51,7 @@ const SearchPage = () => {
         setisLoading(true);
         setSubCat(subCatId)
         fetchDataFromApi(`/api/products?subCatId=${subCatId}`).then((res) => {
+        
             setProductData(res.products);
             setisLoading(false);
         })
@@ -60,6 +61,7 @@ const SearchPage = () => {
         setisLoading(true);
 
         fetchDataFromApi(`/api/products?minPrice=${price[0]}&maxPrice=${price[1]}`).then((res) => {
+        
             setProductData(res.products)
             setisLoading(false);
         })
@@ -69,6 +71,7 @@ const SearchPage = () => {
 
         setisLoading(true);
         fetchDataFromApi(`/api/products?rating=${rating}&subCat=${subCat}`).then((res) => {
+        
             setProductData(res.products)
             setisLoading(false);
         })

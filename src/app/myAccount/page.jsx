@@ -106,6 +106,7 @@ const MyAccount = () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     fetchDataFromApi(`/api/user/${user?.userId}`).then((res) => {
+        
       setUserData(res);
       setPreviews(res.images);
 
@@ -174,6 +175,7 @@ const MyAccount = () => {
     }
 
     uploadImage(apiEndPoint, formdata).then((res) => {
+        
       fetchDataFromApi("/api/imageUpload").then((response) => {
         if (
           response !== undefined &&
@@ -203,6 +205,7 @@ const MyAccount = () => {
           const user = JSON.parse(localStorage.getItem("user"));
 
           fetchDataFromApi(`/api/user/${user?.userId}`).then((res) => {
+        
             const data = {
               name: res?.name,
               email: res?.email,
@@ -212,6 +215,7 @@ const MyAccount = () => {
             };
 
             editData(`/api/user/${user?.userId}`, data).then((res) => {
+        
               setTimeout(() => {
                 setUploading(false);
                 img_arr = [];
@@ -254,6 +258,7 @@ const MyAccount = () => {
       const user = JSON.parse(localStorage.getItem("user"));
 
       editData(`/api/user/${user?.userId}`, formFields).then((res) => {
+        
         // console.log(res);
         setIsLoading(false);
 
@@ -304,6 +309,7 @@ const MyAccount = () => {
 
         editData(`/api/user/changePassword/${user.userId}`, data).then(
           (res) => {
+        
            
           }
         );

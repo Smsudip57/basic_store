@@ -34,6 +34,7 @@ const MyList = () => {
         
         const user = JSON.parse(localStorage.getItem("user"));
         fetchDataFromApi(`/api/my-list?userId=${user?.userId}`).then((res) => {
+        
             setmyListData(res);
         })
     }, []);
@@ -42,6 +43,7 @@ const MyList = () => {
     const removeItem = (id) => {
         setIsLoading(true);
         deleteData(`/api/my-list/${id}`).then((res) => {
+        
             context.setAlertBox({
                 open: true,
                 error: false,
@@ -50,6 +52,7 @@ const MyList = () => {
 
             const user = JSON.parse(localStorage.getItem("user"));
             fetchDataFromApi(`/api/my-list?userId=${user?.userId}`).then((res) => {
+        
                 setmyListData(res);
                 setIsLoading(false);
             })
@@ -86,7 +89,7 @@ const MyList = () => {
                                                     {
                                                         myListData?.length !== 0 && myListData?.map((item, index) => {
                                                             return (
-                                                                <tr>
+                                                                <tr key={index}>
                                                                     <td width="50%">
                                                                         <Link href={`/product/${item?.productId}`}>
                                                                             <div className="d-flex align-items-center cartItemimgWrapper">

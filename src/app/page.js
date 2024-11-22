@@ -53,6 +53,7 @@ export default function Home() {
     if (location !== null && location !== "" && location !== undefined) {
       fetchDataFromApi(`/api/products/featured?location=${location}`).then(
         (res) => {
+        
           setFeaturedProducts(res);
         }
       );
@@ -60,6 +61,7 @@ export default function Home() {
       fetchDataFromApi(
         `/api/products?page=1&perPage=8&location=${location}`
       ).then((res) => {
+        
         setProductsData(res);
       });
     } else {
@@ -68,6 +70,7 @@ export default function Home() {
     }
 
     fetchDataFromApi("/api/homeBanner").then((res) => {
+        
       setHomeSlides(res);
     });
 
@@ -86,6 +89,7 @@ export default function Home() {
       fetchDataFromApi(
         `/api/products/catName?catName=${selectedCat}&location=${location}`
       ).then((res) => {
+        
         setFilterData(res.products);
         setIsLoading(false);
         // console.log(selectedCat)
@@ -155,6 +159,7 @@ export default function Home() {
                     {context.categoryData?.map((item, index) => {
                       return (
                         <Tab
+                          key={index}
                           className="item"
                           label={item.name}
                           onClick={() => selectCat(item.name)}
