@@ -51,12 +51,12 @@ const ThemeProvider = ({ children }) => {
   useEffect(() => {
     getCountry("https://countriesnow.space/api/v0.1/countries/");
 
-
     fetchDataFromApi("/api/category").then((res) => {
-        if (res!==undefined) {
-         
-          return; 
-        }
+        
+        // setCategoryData([])
+        // console.log("this is themeprovider")
+        // console.log(res.categoryList)
+        
       setCategoryData(res.categoryList);
     })
 

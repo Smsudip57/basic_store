@@ -3,10 +3,12 @@ import axios from "axios";
 
 export const fetchDataFromApi = async (url) => {
     try {
-        const { data } = await axios.get(process.env.NEXT_PUBLIC_APP_API_URL + url)
+        const {data} = await axios.get(process.env.NEXT_PUBLIC_APP_API_URL + url)
+        console.log(data)
         return data;
     } catch (error) {
-        console.log(error);
+        console.log("problem" + url);
+        return []
         return error;
     }
 }
