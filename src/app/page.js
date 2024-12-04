@@ -84,7 +84,8 @@ export default function Home() {
 
   useEffect(() => {
     if (selectedCat !== undefined) {
-      setIsLoading(true);
+      setIsLoading(true)
+      
       const location = localStorage.getItem("location");
       console.log(selectedCat, location);
       fetchDataFromApi(
