@@ -78,7 +78,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (context.categoryData[0] !== undefined)
+    if (context.categoryData && context?.categoryData[0] !== undefined)
       setselectedCat(context.categoryData[0].name);
   }, [context.categoryData]);
 
@@ -86,10 +86,11 @@ export default function Home() {
     if (selectedCat !== undefined) {
       setIsLoading(true);
       const location = localStorage.getItem("location");
+      console.log(selectedCat, location);
       fetchDataFromApi(
-        `/api/products/catName?catName=${selectedCat}&location=${location}`
+        `/api/products/catName?catName=${encodeURIComponent(selectedCat)}&location=${encodeURIComponent(location)}`
       ).then((res) => {
-        
+        // {console.log(filterData)}
         setFilterData(res.products);
         setIsLoading(false);
         // console.log(selectedCat)

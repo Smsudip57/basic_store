@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Logo from "../../assets/images/logo.jpg";
+import Logo from "../../assets/images/logo.svg";
 import Button from "@mui/material/Button";
 import CountryDropdown from "../CountryDropdown";
 import { FiUser } from "react-icons/fi";
@@ -99,8 +99,12 @@ const Header = () => {
             <div className="container">
               <div className="row">
                 <div className="logoWrapper d-flex align-items-center col-sm-2">
-                  <Link href={"/"}>
-                    <Image src={Logo} alt="Logo" />
+                  <Link href={"/"} >
+                  <div style={{display:"flex", alignItems:"center", color:"black", justifyContent:"center", alignContent:"center", gap:"15px"}}>
+                    <Image src={Logo} alt="Logo" style={{ height: "55px" }} />
+                  <p className="" style={{fontSize:"20px", fontWeight:"bold", textWrap:"nowrap", margin:"0", fontFamily:'sans-serif', color:"#2D3834"}}>Webme Store</p>
+
+                  </div>
                   </Link>
                 </div>
 

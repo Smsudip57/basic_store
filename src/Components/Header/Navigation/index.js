@@ -1,11 +1,13 @@
 import Button from "@mui/material/Button";
 import { IoIosMenu } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState,useRef } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { MyContext } from "@/context/ThemeContext";
 import CountryDropdown from "@/Components/CountryDropdown";
 import Link from "next/link";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 const Navigation = (props) => {
   const [isopenSidebarVal, setisopenSidebarVal] = useState(false);
@@ -86,13 +88,13 @@ const Navigation = (props) => {
           >
             <div className="res-nav-overlay" onClick={props.closeNav}></div>
 
-            <ul className="list list-inline ml-auto res-nav">
+            <ul className="list list-inline ml-auto res-nav" style={{display:"flex", overflow:"auto",}}>
               {context.windowWidth < 992 && (
                 <>
                   {context.isLogin !== true && (
-                    <li className="list-inline-item pl-3">
+                    <li className="list-inline-item pl-3"  style={{display:"flex"}}>
                       <Link href="/signIn">
-                        <Button className="btn-blue btn-round mr-3">
+                        <Button className="btn-blue btn-round mr-3" >
                           Sign In
                         </Button>
                       </Link>
@@ -114,16 +116,26 @@ const Navigation = (props) => {
               //   </Link>
               // </li>
               }
-              {props.navData
-                .filter((item, idx) => idx < 8)
+              <Tabs
+                    variant="scrollable"
+                    scrollButtons="auto"
+                    className="filterTabs "
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+              {props?.navData
+                ?.filter((item, idx) => idx < 8)
                 .map((item, index) => {
                   return (
-                    <li className="list-inline-item" key={index}>
+                    <li className="list-inline-item" key={index} style={{paddingBottom:"0px"}}>
                       <Link
                         href={`/category/${item?._id}`}
                         onClick={props.closeNav}
                       >
-                        <Button>{item?.name}</Button>
+                        <Button className="" style={{textWrap:"nowrap"}}>{item?.name}</Button>
                       </Link>
 
                       {item?.children?.length !== 0 &&
@@ -163,6 +175,7 @@ const Navigation = (props) => {
                     </li>
                   );
                 })}
+                </Tabs>
             </ul>
           </div>
         </div>
