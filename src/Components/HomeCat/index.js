@@ -15,6 +15,10 @@ const HomeCat = (props) => {
     return (
         <section className="homeCat pb-2">
             <div className="container">
+
+                {
+                    props?.data?.length !== 0 && console.log(props?.data)
+                }
                 <h3 className="mb-3 hd">Featured Categories</h3>
                 <Swiper
                     slidesPerView={9}

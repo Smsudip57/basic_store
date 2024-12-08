@@ -123,9 +123,10 @@ const Footer = () => {
 
 
                             <div className="row mt-5 linksWrap">
-                                <div className="col">
-                                    <h5>FRUIT & VEGETABLES</h5>
-                                    <ul>
+                                {context.categoryData.length !== 0 && context.categoryData.map((item, index) => (
+                                    <div className="col" key={index}>
+                                    <h5 className='uppercase cursor-pointer'><Link href={`/category/${item._id}`} style={{textDecoration:"none", color:"#7A55C1"}}>{item.name}</Link></h5>
+                                    {/* <ul>
                                         <li><Link href="/">Fresh Vegetables</Link></li>
                                         <li><Link href="/">Herbs & Seasonings</Link></li>
                                         <li><Link href="/">Fresh Fruits</Link></li>
@@ -133,60 +134,10 @@ const Footer = () => {
                                         <li><Link href="/">Exotic Fruits & Veggies</Link></li>
                                         <li><Link href="/">Packaged Produce</Link></li>
                                         <li><Link href="/">Party Trays</Link></li>
-                                    </ul>
+                                    </ul> */}
                                 </div>
+                                ))}
 
-                                <div className="col">
-                                    <h5>BREAKFAST & DAIRY</h5>
-                                    <ul>
-                                        <li><Link href="/">Fresh Vegetables</Link></li>
-                                        <li><Link href="/">Herbs & Seasonings</Link></li>
-                                        <li><Link href="/">Fresh Fruits</Link></li>
-                                        <li><Link href="/">Cuts & Sprouts</Link></li>
-                                        <li><Link href="/">Exotic Fruits & Veggies</Link></li>
-                                        <li><Link href="/">Packaged Produce</Link></li>
-                                        <li><Link href="/">Party Trays</Link></li>
-                                    </ul>
-                                </div>
-
-                                <div className="col">
-                                    <h5>MEAT & SEAFOOD</h5>
-                                    <ul>
-                                        <li><Link href="/">Fresh Vegetables</Link></li>
-                                        <li><Link href="/">Herbs & Seasonings</Link></li>
-                                        <li><Link href="/">Fresh Fruits</Link></li>
-                                        <li><Link href="/">Cuts & Sprouts</Link></li>
-                                        <li><Link href="/">Exotic Fruits & Veggies</Link></li>
-                                        <li><Link href="/">Packaged Produce</Link></li>
-                                        <li><Link href="/">Party Trays</Link></li>
-                                    </ul>
-                                </div>
-
-                                <div className="col">
-                                    <h5>BEVERAGES</h5>
-                                    <ul>
-                                        <li><Link href="/">Fresh Vegetables</Link></li>
-                                        <li><Link href="/">Herbs & Seasonings</Link></li>
-                                        <li><Link href="/">Fresh Fruits</Link></li>
-                                        <li><Link href="/">Cuts & Sprouts</Link></li>
-                                        <li><Link href="/">Exotic Fruits & Veggies</Link></li>
-                                        <li><Link href="/">Packaged Produce</Link></li>
-                                        <li><Link href="/">Party Trays</Link></li>
-                                    </ul>
-                                </div>
-
-                                <div className="col">
-                                    <h5>BREADS & BAKERY</h5>
-                                    <ul>
-                                        <li><Link href="/">Fresh Vegetables</Link></li>
-                                        <li><Link href="/">Herbs & Seasonings</Link></li>
-                                        <li><Link href="/">Fresh Fruits</Link></li>
-                                        <li><Link href="/">Cuts & Sprouts</Link></li>
-                                        <li><Link href="/">Exotic Fruits & Veggies</Link></li>
-                                        <li><Link href="/">Packaged Produce</Link></li>
-                                        <li><Link href="/">Party Trays</Link></li>
-                                    </ul>
-                                </div>
                             </div>
 
 
