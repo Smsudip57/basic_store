@@ -27,7 +27,7 @@ const PaymentFailure = () => {
                             </div>
                             <h2 className='text-danger mb-3'>Payment Failed</h2>
                             <p className='text-muted mb-4'>
-                                We couldn't process your payment. Please check your payment details 
+                                We couldn&apos;t process your payment. Please check your payment details 
                                 and try again, or contact support if the problem persists.
                             </p>
                             <div className='d-flex gap-3 justify-content-center'>
