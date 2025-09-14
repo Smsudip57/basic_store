@@ -86,29 +86,20 @@ const Header = () => {
         context.isHeaderFooterShow===true &&
         <div className="headerWrapperFixed" ref={headerRef}>
         <div className="headerWrapper">
-          <div className="top-strip bg-blue">
-            <div className="container">
-              <p className="mb-0 mt-0 text-center">
-                Due to the <b>COVID 19</b> epidemic, orders may be processed
-                with a slight delay
-              </p>
-            </div>
-          </div>
-
           <header className="header">
             <div className="container">
               <div className="row">
-                <div className="logoWrapper d-flex align-items-center col-sm-2">
+                <div className="logoWrapper d-flex align-items-center col-sm-3">
                   <Link href={"/"} >
                   <div style={{display:"flex", alignItems:"center", color:"black", justifyContent:"center", alignContent:"center", gap:"15px"}}>
                     <Image src={Logo} alt="Logo" style={{ height: "55px" }} />
-                  <p className="" style={{fontSize:"20px", fontWeight:"bold", textWrap:"nowrap", margin:"0", fontFamily:'sans-serif', color:"#2D3834"}}>Webme Store</p>
+                  {/* <p className="" style={{fontSize:"20px", fontWeight:"bold", textWrap:"nowrap", margin:"0", fontFamily:'sans-serif', color:"#2D3834"}}>Webme Store</p> */}
 
                   </div>
                   </Link>
                 </div>
 
-                <div className="col-sm-10 d-flex align-items-center part2">
+                <div className="col-sm-9 d-flex align-items-center part2">
                   {context.countryList.length !== 0 &&
                     context.windowWidth > 992 && <CountryDropdown />}
 
@@ -212,7 +203,7 @@ const Header = () => {
                             : 0
                           )?.toLocaleString("en-US", {
                             style: "currency",
-                            currency: "INR",
+                            currency: "AED",
                           })}
                         </span>
                       )}

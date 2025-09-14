@@ -176,12 +176,20 @@ export default function Home() {
                 className="product_row w-100 mt-2"
                 style={{ opacity: `${isLoading === true ? "0.5" : "1"}` }}
               >
-                {filterData?.length === 0 && (
+                {filterData?.length === 0 && isLoading && (
                   <div
                     className="d-flex align-items-center justify-content-center"
                     style={{ minHeight: "300px" }}
                   >
                     <CircularProgress />
+                  </div>
+                )}
+                {filterData?.length === 0 && (
+                  <div
+                    className="d-flex align-items-center justify-content-center "
+                    style={{ minHeight: "300px", opacity: "0.3" }}
+                  >
+                    <h4>No products found</h4>
                   </div>
                 )}
 
@@ -260,12 +268,20 @@ export default function Home() {
                 </div>
               </div>
 
-              {featuredProducts?.length === 0 && (
+              {featuredProducts?.length === 0 && isLoading && (
                 <div
                   className="d-flex align-items-center justify-content-center"
                   style={{ minHeight: "300px" }}
                 >
                   <CircularProgress />
+                </div>
+              )}
+              {featuredProducts?.length === 0 && (
+                <div
+                  className="d-flex align-items-center justify-content-center"
+                  style={{ minHeight: "300px", opacity: "0.3" }}
+                >
+                  <h4>No products found</h4>
                 </div>
               )}
 

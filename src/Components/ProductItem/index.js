@@ -179,8 +179,8 @@ const ProductItem = (props) => {
                     <Rating className="mt-2 mb-2" name="read-only" value={props?.item?.rating} readOnly size="small" precision={0.5} />
 
                     <div className="d-flex">
-                        <span className="oldPrice">Rs {props?.item?.oldPrice}</span>
-                        <span className="netPrice text-danger ml-2">Rs {props?.item?.price}</span>
+                        <span className="oldPrice">AED {props?.item?.oldPrice}</span>
+                        <span className="netPrice text-danger ml-2">AED {props?.item?.price}</span>
                     </div>
 
 

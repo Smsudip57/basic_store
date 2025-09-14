@@ -8,7 +8,6 @@ import { MyContext } from '@/context/ThemeContext';
 
 import { useRouter } from 'next/navigation';
 import { fetchDataFromApi, postData,deleteData } from '@/utils/api';
-import Script from 'next/script';
 
 const Checkout = () => {
 
@@ -157,70 +156,61 @@ const Checkout = () => {
             )
         }
 
+        // Ziina Payment Integration
+        const user = JSON.parse(localStorage.getItem("user"));
 
+        const payLoad = {
+            name: addressInfo.name,
+            phoneNumber: formFields.phoneNumber,
+            address: addressInfo.address,
+            pincode: addressInfo.pincode,
+            amount: totalAmount, // Ziina expects amount in AED, not cents
+            email: user.email,
+            userid: user.userId,
+            products: cartData
+        }
 
+        console.log("Creating Ziina payment with payload:", payLoad);
 
-        var options = {
-            key: process.env.NEXT_PUBLIC_APP_RAZORPAY_KEY_ID,
-            key_secret: process.env.NEXT_PUBLIC_APP_RAZORPAY_KEY_SECRET,
-            amount: parseInt(totalAmount * 100),
-            currency: "INR",
-            order_receipt: 'order_rcptid_' + formFields.fullName,
-            name: "E-Bharat",
-            description: "for testing purpose",
-            handler: function (response) {
+        // Create payment intent with Ziina
+        postData(`/api/orders/create`, payLoad).then((res) => {
+            console.log("Ziina payment response:", res);
+            
+            if (res.success && res.paymentUrl) {
+                // Store order ID for later reference
+                localStorage.setItem("pendingOrderId", res.orderId);
+                localStorage.setItem("paymentIntentId", res.paymentIntentId);
+                
+                // Clear cart before redirecting to payment
+                fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((cartRes) => {
+                    cartRes?.length !== 0 && cartRes?.map((item) => {
+                        deleteData(`/api/cart/${item?.id}`)
+                    })
+                    
+                    // Update cart context
+                    setTimeout(() => {
+                        context.getCartData();
+                    }, 1000);
+                });
 
-                 console.log(response)
-
-
-                const paymentId = response.razorpay_payment_id
-
-                const user = JSON.parse(localStorage.getItem("user"));
-
-                const payLoad = {
-                    name: addressInfo.name,
-                    phoneNumber: formFields.phoneNumber,
-                    address: addressInfo.address,
-                    pincode: addressInfo.pincode,
-                    amount: parseInt(totalAmount * 100),
-                    paymentId: paymentId,
-                    email: user.email,
-                    userid: user.userId,
-                    products: cartData
-                }
-
-               // console.log(payLoad)
-
-
-                 postData(`/api/orders/create`, payLoad).then((res) => {
-        
-             fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
-        
-            res?.length!==0 && res?.map((item)=>{
-                deleteData(`/api/cart/${item?.id}`).then((res) => {
-        
-                })    
-            })
-                setTimeout(()=>{
-                    context.getCartData();
-                },1000);
-                history.push("/orders");
-          });
-         
-        });
-
-
-
-            },
-
-            theme: {
-                color: "#3399cc"
+                // Redirect to Ziina payment page
+                window.location.href = res.paymentUrl;
+            } else {
+                // Handle payment creation error
+                context.setAlertBox({
+                    open: true,
+                    error: true,
+                    msg: res.message || "Payment creation failed. Please try again."
+                });
             }
-        };
-
-
-        var pay = new window.Razorpay(options);
-        pay.open();
+        }).catch((error) => {
+            console.error("Payment creation error:", error);
+            context.setAlertBox({
+                open: true,
+                error: true,
+                msg: "Payment failed. Please try again."
+            });
+        });
 
 
     }
@@ -343,7 +333,7 @@ const Checkout = () => {
                                                             <td> 
                                                             
                                                             {
-                                                                item?.subTotal?.toLocaleString('en-US', { style: 'currency', currency: 'INR' })
+                                                                item?.subTotal?.toLocaleString('en-US', { style: 'currency', currency: 'AED' })
                                                             }
                                                             
                                                          </td>
@@ -362,7 +352,7 @@ const Checkout = () => {
 
                                                 {
                                                     (cartData?.length !== 0 ?
-                                                        cartData?.map(item => parseInt(item.price) * item.quantity).reduce((total, value) => total + value, 0) : 0)?.toLocaleString('en-US', { style: 'currency', currency: 'INR' })
+                                                        cartData?.map(item => parseInt(item.price) * item.quantity).reduce((total, value) => total + value, 0) : 0)?.toLocaleString('en-US', { style: 'currency', currency: 'AED' })
                                                 }
 
                                                   
@@ -385,8 +375,6 @@ const Checkout = () => {
                 </form>
             </div>
         </section>
-
-        <Script src="https://checkout.razorpay.com/v1/checkout.js"/>
         </>
     )
 }

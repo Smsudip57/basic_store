@@ -35,7 +35,8 @@
     "react-slick": "^0.30.2",
     "styled-components": "^6.1.8",
     "swiper": "^11.1.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "tailwindcss": "^3"
   },
   "devDependencies": {
     "eslint": "^8",

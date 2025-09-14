@@ -1,15 +1,13 @@
-"use client"
+"use client";
 
 import { MyContext } from "./ThemeContext";
 import { fetchDataFromApi, postData } from "@/utils/api";
 import { useEffect, useState } from "react";
-import axios from 'axios';
-
+import axios from "axios";
 
 const ThemeProvider = ({ children }) => {
-
   const [countryList, setCountryList] = useState([]);
-  const [selectedCountry, setselectedCountry] = useState('');
+  const [selectedCountry, setselectedCountry] = useState("");
   const [isOpenProductModal, setisOpenProductModal] = useState(false);
   const [isHeaderFooterShow, setisHeaderFooterShow] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
@@ -25,83 +23,70 @@ const ThemeProvider = ({ children }) => {
   const [windowWidth, setWindowWidth] = useState();
 
   const [alertBox, setAlertBox] = useState({
-    msg: '',
+    msg: "",
     error: false,
-    open: false
-  })
+    open: false,
+  });
 
   const [user, setUser] = useState({
     name: "",
     email: "",
-    userId: ""
-  })
+    userId: "",
+  });
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
+    handleResize();
 
     // Add the event listener when the component mounts
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Clean up the event listener when the component unmounts
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-
 
   useEffect(() => {
     getCountry("https://countriesnow.space/api/v0.1/countries/");
 
     fetchDataFromApi("/api/category").then((res) => {
-        
-        // setCategoryData([])
-        // console.log("this is themeprovider")
-        // console.log(res.categoryList)
-        
+      // setCategoryData([])
+      // console.log("this is themeprovider")
+      // console.log(res.categoryList)
+
       setCategoryData(res.categoryList);
-    })
-
-
+    });
 
     const user = JSON.parse(localStorage.getItem("user"));
     fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
-        if (res!==undefined) {
-         
-          return; 
-        }
-      setCartData(res)
+      if (res !== undefined) {
+        setCartData(res);
+      }
     });
-
 
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
 
-     const location = localStorage.getItem("location");
+    const location = localStorage.getItem("location");
     if (location !== null && location !== "" && location !== undefined) {
-      setselectedCountry(location)
+      setselectedCountry(location);
     }
 
-
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
-
   }, []);
-
 
   const getCartData = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     fetchDataFromApi(`/api/cart?userId=${user?.userId}`).then((res) => {
-        if (res!==undefined) {
-         
-          return; 
-        }
-      setCartData(res)
+      if (res !== undefined) {
+        setCartData(res);
+      }
     });
-  }
-
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -112,87 +97,76 @@ const ThemeProvider = ({ children }) => {
       const userData = JSON.parse(localStorage.getItem("user"));
 
       setUser(userData);
-
     } else {
       setIsLogin(false);
     }
   }, [isLogin]);
 
-
   const openProductDetailsModal = (id, status) => {
     fetchDataFromApi(`/api/products/${id}`).then((res) => {
-        if (res!==undefined) {
-         
-          return; 
-        }
+      if (res !== undefined) {
+        return;
+      }
       setProductData(res);
       setisOpenProductModal(status);
-    })
-  }
+    });
+  };
 
   const getCountry = async (url) => {
     const responsive = await axios.get(url).then((res) => {
-        if (res!==undefined) {
-         
-          return; 
-        }
-      setCountryList(res.data.data)
-    })
-  }
+      if (res !== undefined) {
+        return;
+      }
+      setCountryList(res.data.data);
+    });
+  };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
     setAlertBox({
-      open: false
+      open: false,
     });
   };
 
   const addToCart = (data) => {
-
-    if(isLogin===true){
+    if (isLogin === true) {
       setAddingInCart(true);
       postData(`/api/cart/add`, data).then((res) => {
-        if (res!==undefined) {
-         
-          return; 
+        if (res === undefined) {
+          return;
         }
         if (res.status !== false) {
           setAlertBox({
             open: true,
             error: false,
-            msg: "Item is added in the cart"
-          })
-  
+            msg: "Item is added in the cart",
+          });
+
           setTimeout(() => {
             setAddingInCart(false);
           }, 1000);
-  
+
           getCartData();
-  
-        }
-        else {
+        } else {
           setAlertBox({
             open: true,
             error: true,
-            msg: res.msg
-          })
+            msg: res.msg,
+          });
           setAddingInCart(false);
         }
-  
-      })
-    }
-    else{
+      });
+    } else {
       setAlertBox({
-        open:true,
-        error:true,
-        msg:"Please login first"
-      })
+        open: true,
+        error: true,
+        msg: "Please login first",
+      });
     }
-   
-  }
+  };
 
   const values = {
     countryList,
@@ -222,15 +196,10 @@ const ThemeProvider = ({ children }) => {
     windowWidth,
     isOpenNav,
     setIsOpenNav,
-    productData
-  }
+    productData,
+  };
 
-
-  return (
-    <MyContext.Provider value={values}>
-      {children}
-    </MyContext.Provider>
-  )
-}
+  return <MyContext.Provider value={values}>{children}</MyContext.Provider>;
+};
 
 export default ThemeProvider;

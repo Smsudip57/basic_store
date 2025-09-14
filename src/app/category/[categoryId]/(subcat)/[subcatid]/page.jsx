@@ -207,7 +207,12 @@ const Listing = ({ params }) => {
                                         </>
 
                                 }
-
+                                  {
+                                    productData?.products?.length === 0 && isLoading === false &&
+                                    <div className="loading d-flex align-items-center justify-content-center" style={{ minHeight: "300px", opacity: "0.3" }}>
+                                        <h4>No products found</h4>
+                                    </div>
+                                }
 
 
                             </div>

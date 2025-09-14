@@ -154,11 +154,11 @@ const Cart = () => {
                                                                         </div>
                                                                     </Link>
                                                                 </td>
-                                                                <td width="15%">Rs {item?.price}</td>
+                                                                <td width="15%">AED {item?.price}</td>
                                                                 <td width="25%">
                                                                     <QuantityBox quantity={quantity} item={item} selectedItem={selectedItem} value={item?.quantity} />
                                                                 </td>
-                                                                <td width="15%">Rs. {item?.subTotal}</td>
+                                                                <td width="15%">AED. {item?.subTotal}</td>
                                                                 <td width="10%"><span className="remove" onClick={() => removeItem(item?._id)}><IoIosClose /></span></td>
                                                             </tr>
                                                         )
@@ -180,7 +180,7 @@ const Cart = () => {
                                             <span className="ml-auto text-red font-weight-bold">
                                             {
                                                 (context.cartData?.length !== 0 ?
-                                                    context.cartData?.map(item => parseInt(item.price) * item.quantity).reduce((total, value) => total + value, 0) : 0)?.toLocaleString('en-US', { style: 'currency', currency: 'INR' })
+                                                    context.cartData?.map(item => parseInt(item.price) * item.quantity).reduce((total, value) => total + value, 0) : 0)?.toLocaleString('en-US', { style: 'currency', currency: 'AED' })
                                             }
                                             </span>
                                         </div>
@@ -192,7 +192,7 @@ const Cart = () => {
 
                                         <div className="d-flex align-items-center mb-3">
                                             <span>Estimate for</span>
-                                            <span className="ml-auto"><b>United Kingdom</b></span>
+                                            <span className="ml-auto"><b>United Arab Emirates</b></span>
                                         </div>
 
                                         <div className="d-flex align-items-center">
@@ -200,7 +200,7 @@ const Cart = () => {
                                             <span className="ml-auto text-red font-weight-bold">
                                             {
                                                 (context.cartData?.length !== 0 ?
-                                                    context.cartData?.map(item => parseInt(item.price) * item.quantity).reduce((total, value) => total + value, 0) : 0)?.toLocaleString('en-US', { style: 'currency', currency: 'INR' })
+                                                    context.cartData?.map(item => parseInt(item.price) * item.quantity).reduce((total, value) => total + value, 0) : 0)?.toLocaleString('en-US', { style: 'currency', currency: 'AED' })
                                             }
                                             </span>
                                         </div>

@@ -37,7 +37,7 @@ function CustomTabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component="div">{children}</Typography>
         </Box>
       )}
     </div>
@@ -106,7 +106,6 @@ const MyAccount = () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     fetchDataFromApi(`/api/user/${user?.userId}`).then((res) => {
-        
       setUserData(res);
       setPreviews(res.images);
 
@@ -136,7 +135,7 @@ const MyAccount = () => {
   let uniqueArray = [];
   let selectedImages = [];
 
- const onChangeFile = async (e, apiEndPoint) => {
+  const onChangeFile = async (e, apiEndPoint) => {
     try {
       setPreviews([]);
 
@@ -175,7 +174,6 @@ const MyAccount = () => {
     }
 
     uploadImage(apiEndPoint, formdata).then((res) => {
-        
       fetchDataFromApi("/api/imageUpload").then((response) => {
         if (
           response !== undefined &&
@@ -205,17 +203,15 @@ const MyAccount = () => {
           const user = JSON.parse(localStorage.getItem("user"));
 
           fetchDataFromApi(`/api/user/${user?.userId}`).then((res) => {
-        
             const data = {
               name: res?.name,
               email: res?.email,
               phone: res?.phone,
               images: uniqueArray,
-              isAdmin: res?.isAdmin
+              isAdmin: res?.isAdmin,
             };
 
             editData(`/api/user/${user?.userId}`, data).then((res) => {
-        
               setTimeout(() => {
                 setUploading(false);
                 img_arr = [];
@@ -232,7 +228,6 @@ const MyAccount = () => {
       });
     });
   };
-
 
   const edituser = (e) => {
     e.preventDefault();
@@ -258,7 +253,6 @@ const MyAccount = () => {
       const user = JSON.parse(localStorage.getItem("user"));
 
       editData(`/api/user/${user?.userId}`, formFields).then((res) => {
-        
         // console.log(res);
         setIsLoading(false);
 
@@ -308,10 +302,7 @@ const MyAccount = () => {
         };
 
         editData(`/api/user/changePassword/${user.userId}`, data).then(
-          (res) => {
-        
-           
-          }
+          (res) => {}
         );
       }
     } else {
@@ -325,170 +316,176 @@ const MyAccount = () => {
   };
 
   return (
-  <>
-  <div className="marginTop"></div>
-    <section className="section myAccountPage">
-      <div className="container">
-        <h2 className="hd">My Account</h2>
+    <>
+      <div className="marginTop"></div>
+      <section className="section myAccountPage">
+        <div className="container">
+          <h2 className="hd">My Account</h2>
 
-        <Box sx={{ width: "100%" }} className="myAccBox card border-0">
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="basic tabs example"
-            >
-              <Tab label="Edit Profile" {...a11yProps(0)} />
-              <Tab label="Change Password" {...a11yProps(1)} />
-            </Tabs>
-          </Box>
-          <CustomTabPanel value={value} index={0}>
-            <form onSubmit={edituser}>
-              <div className="row">
-                <div className="col-md-4">
-                  <div className="userImage d-flex align-items-center justify-content-center">
-                    {uploading === true ? (
-                      <CircularProgress />
-                    ) : (
-                      <>
-                        {previews?.length !== 0 ? (
-                          previews?.map((img, index) => {
-                            return <img src={img} key={index} />;
-                          })
-                        ) : (
-                          <Image src={NoUserImg} width={60} height={60} className="noUserImg" alt="image" />
-                        )}
-                        <div className="overlay d-flex align-items-center justify-content-center">
-                          <IoMdCloudUpload />
-                          <input
-                            type="file"
-                            multiple
-                            onChange={(e) =>
-                              onChangeFile(e, "/api/user/upload")
-                            }
-                            name="images"
+          <Box sx={{ width: "100%" }} className="myAccBox card border-0">
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+              >
+                <Tab label="Edit Profile" {...a11yProps(0)} />
+                <Tab label="Change Password" {...a11yProps(1)} />
+              </Tabs>
+            </Box>
+            <CustomTabPanel value={value} index={0}>
+              <form onSubmit={edituser}>
+                <div className="row">
+                  <div className="col-md-4">
+                    <div className="userImage d-flex align-items-center justify-content-center">
+                      {uploading === true ? (
+                        <CircularProgress />
+                      ) : (
+                        <>
+                          {previews?.length !== 0 ? (
+                            previews?.map((img, index) => {
+                              return <img src={img} key={index} />;
+                            })
+                          ) : (
+                            <Image
+                              src={NoUserImg}
+                              width={60}
+                              height={60}
+                              className="noUserImg"
+                              alt="image"
+                            />
+                          )}
+                          <div className="overlay d-flex align-items-center justify-content-center">
+                            <IoMdCloudUpload />
+                            <input
+                              type="file"
+                              multiple
+                              onChange={(e) =>
+                                onChangeFile(e, "/api/user/upload")
+                              }
+                              name="images"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="col-md-8">
+                    <div className="row">
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <TextField
+                            label="Name"
+                            variant="outlined"
+                            className="w-100"
+                            name="name"
+                            onChange={changeInput}
+                            value={formFields.name}
                           />
                         </div>
-                      </>
-                    )}
+                      </div>
+
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <TextField
+                            label="Email"
+                            disabled
+                            variant="outlined"
+                            className="w-100"
+                            name="email"
+                            onChange={changeInput}
+                            value={formFields.email}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <TextField
+                            label="Phone"
+                            variant="outlined"
+                            className="w-100"
+                            name="phone"
+                            onChange={changeInput}
+                            value={formFields.phone}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="form-group">
+                      <Button
+                        type="submit"
+                        className="btn-blue bg-red btn-lg btn-big"
+                      >
+                        {" "}
+                        Save
+                      </Button>
+                    </div>
                   </div>
                 </div>
+              </form>
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={1}>
+              <form onSubmit={changePassword}>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="row">
+                      <div className="col-md-4">
+                        <div className="form-group">
+                          <TextField
+                            label="Old Password"
+                            variant="outlined"
+                            className="w-100"
+                            name="oldPassword"
+                            onChange={changeInput2}
+                          />
+                        </div>
+                      </div>
 
-                <div className="col-md-8">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="form-group">
-                        <TextField
-                          label="Name"
-                          variant="outlined"
-                          className="w-100"
-                          name="name"
-                          onChange={changeInput}
-                          value={formFields.name}
-                        />
+                      <div className="col-md-4">
+                        <div className="form-group">
+                          <TextField
+                            label="New password"
+                            variant="outlined"
+                            className="w-100"
+                            name="password"
+                            onChange={changeInput2}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="col-md-4">
+                        <div className="form-group">
+                          <TextField
+                            label="Confirm Password"
+                            variant="outlined"
+                            className="w-100"
+                            name="confirmPassword"
+                            onChange={changeInput2}
+                          />
+                        </div>
                       </div>
                     </div>
 
-                    <div className="col-md-6">
-                      <div className="form-group">
-                        <TextField
-                          label="Email"
-                          disabled
-                          variant="outlined"
-                          className="w-100"
-                          name="email"
-                          onChange={changeInput}
-                          value={formFields.email}
-                        />
-                      </div>
+                    <div className="form-group">
+                      <Button
+                        type="submit"
+                        className="btn-blue bg-red btn-lg btn-big"
+                      >
+                        {" "}
+                        Save
+                      </Button>
                     </div>
-
-                    <div className="col-md-6">
-                      <div className="form-group">
-                        <TextField
-                          label="Phone"
-                          variant="outlined"
-                          className="w-100"
-                          name="phone"
-                          onChange={changeInput}
-                          value={formFields.phone}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <Button
-                      type="submit"
-                      className="btn-blue bg-red btn-lg btn-big"
-                    >
-                      {" "}
-                      Save
-                    </Button>
                   </div>
                 </div>
-              </div>
-            </form>
-          </CustomTabPanel>
-          <CustomTabPanel value={value} index={1}>
-            <form onSubmit={changePassword}>
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="row">
-                    <div className="col-md-4">
-                      <div className="form-group">
-                        <TextField
-                          label="Old Password"
-                          variant="outlined"
-                          className="w-100"
-                          name="oldPassword"
-                          onChange={changeInput2}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-md-4">
-                      <div className="form-group">
-                        <TextField
-                          label="New password"
-                          variant="outlined"
-                          className="w-100"
-                          name="password"
-                          onChange={changeInput2}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-md-4">
-                      <div className="form-group">
-                        <TextField
-                          label="Confirm Password"
-                          variant="outlined"
-                          className="w-100"
-                          name="confirmPassword"
-                          onChange={changeInput2}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <Button
-                      type="submit"
-                      className="btn-blue bg-red btn-lg btn-big"
-                    >
-                      {" "}
-                      Save
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </CustomTabPanel>
-        </Box>
-      </div>
-    </section>
-  </>
+              </form>
+            </CustomTabPanel>
+          </Box>
+        </div>
+      </section>
+    </>
   );
 };
 
