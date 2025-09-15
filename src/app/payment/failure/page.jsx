@@ -32,12 +32,6 @@ const PaymentFailure = () => {
                             </p>
                             <div className='d-flex gap-3 justify-content-center'>
                                 <button 
-                                    className='btn btn-primary'
-                                    onClick={() => router.push("/checkout")}
-                                >
-                                    Try Again
-                                </button>
-                                <button 
                                     className='btn btn-outline-secondary'
                                     onClick={() => router.push("/")}
                                 >

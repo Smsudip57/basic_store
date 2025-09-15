@@ -40,7 +40,7 @@ const PaymentSuccess = () => {
                             </p>
                             <div className='d-flex gap-3 justify-content-center'>
                                 <button 
-                                    className='btn btn-primary'
+                                    className='btn btn-primary mr-3'
                                     onClick={() => router.push("/orders")}
                                 >
                                     View Orders
