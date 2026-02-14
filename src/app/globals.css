@@ -6,7 +6,48 @@
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css");
+.navCategoryButton {
+  color: white !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 10px !important;
+  cursor: pointer !important;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 6px !important;
+  text-align: left !important;
+  width: 100% !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
 
+.navCategoryButton:hover {
+  color: #fff !important;
+  opacity: 0.8 !important;
+  transition: all 0.3s ease !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+.spec-table {
+  border-collapse: collapse !important;
+  width: 100%;
+  border: 1px solid #dee2e6 !important;
+}
+
+.spec-table thead th,
+.spec-table tbody td,
+.spec-table tbody th {
+  border: none !important;
+  padding: 8px 15px  !important;
+}
+.spec-table p{
+  margin-bottom: auto !important;
+}
 body {
   font-family: "Lato", sans-serif;
   font-size: 14px;
@@ -165,7 +206,9 @@ button {
 }
 .headerWrapperFixed.fixed {
   top: -95px;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 6%), 0 1px 2px rgb(0 0 0 / 12%);
+  box-shadow:
+    0 1px 3px rgb(0 0 0 / 6%),
+    0 1px 2px rgb(0 0 0 / 12%);
 }
 .MuiDialog-root {
   z-index: 100000 !important;
@@ -584,7 +627,9 @@ nav .navPart2 ul li .submenu {
   overflow: hidden;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
 }
 nav .navPart2 ul li .submenu a {
   display: block;
@@ -639,7 +684,9 @@ nav .navPart2 ul li:hover .submenu {
   border-radius: 100%;
   font-family: FontAwesome !important;
   font-weight: bold;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%) !important;
+  box-shadow:
+    0 1px 3px rgb(0 0 0 / 12%),
+    0 1px 2px rgb(0 0 0 / 24%) !important;
 }
 
 /* @-webkit-keyframes zooming{0%{-webkit-transform:scale(1)}100%{-webkit-transform:scale(1.2)}}@keyframes zooming{0%{transform:scale(1)}100%{transform:scale(1.2)}} */
@@ -658,7 +705,9 @@ nav .navPart2 ul li:hover .submenu {
   border-radius: 100%;
   font-family: FontAwesome !important;
   font-weight: bold;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%) !important;
+  box-shadow:
+    0 1px 3px rgb(0 0 0 / 12%),
+    0 1px 2px rgb(0 0 0 / 24%) !important;
 }
 
 .swiper-button-prev:after,
@@ -726,7 +775,9 @@ nav .navPart2 ul li:hover .submenu {
   text-decoration: none;
 }
 .productItem:hover {
-  box-shadow: 0 3px 6px rgba(123, 108, 108, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 3px 6px rgba(123, 108, 108, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
   border: 1px solid transparent !important;
 }
 
@@ -795,7 +846,9 @@ nav .navPart2 ul li:hover .submenu {
   border: 1px solid rgba(0, 0, 0, 0.1) !important;
   border-radius: 50% !important;
   background: #fff !important;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%) !important;
+  box-shadow:
+    0 1px 3px rgb(0 0 0 / 12%),
+    0 1px 2px rgb(0 0 0 / 24%) !important;
   transition: all 0s !important;
 }
 
@@ -1021,7 +1074,9 @@ nav .navPart2 ul li:hover .submenu {
 }
 
 .homeCat .swiper .item:hover {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
   transform: translateY(-5px);
 }
 
@@ -2071,4 +2126,16 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .MuiPagination-root button svg {
   color: #000 !important;
+}
+
+.jodit-wysiwyg ul,
+.jodit-wysiwyg ol {
+  display: block !important;
+  margin: 10px 0 !important;
+  padding-left: 20px !important;
+  list-style-position: outside !important;
+}
+
+.kill_bootstrap {
+  margin-top: 0px !important;
 }

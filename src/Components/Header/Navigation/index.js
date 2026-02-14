@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import { IoIosMenu } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
-import { useContext, useEffect, useState,useRef } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { MyContext } from "@/context/ThemeContext";
 import CountryDropdown from "@/Components/CountryDropdown";
@@ -49,15 +49,19 @@ const Navigation = (props) => {
                 className={`sidebarNav ${
                   isopenSidebarVal === true ? "open" : ""
                 }`}
+                style={{ backgroundColor: "#7A55C1", borderRadius: "16px" }}
               >
                 <ul>
                   {props.navData?.map((item, index) => {
                     return (
                       <li key={index}>
                         <Link href={`/category/${item?._id}`}>
-                          <Button>
+                          <div
+                            className="navCategoryButton"
+                            style={{ color: "white", fontSize: "14px"}}
+                          >
                             {item?.name} <FaAngleRight className="ml-auto" />
-                          </Button>
+                          </div>
                         </Link>
                         {item?.children?.length !== 0 && (
                           <div className="submenu">
@@ -67,7 +71,12 @@ const Navigation = (props) => {
                                   href={`/category/subCat/${subCat?._id}`}
                                   key={key}
                                 >
-                                  <Button>{subCat?.name}</Button>
+                                  <div
+                                    className="navCategoryButton"
+                                    style={{ color: "white", fontSize: "14px" }}
+                                  >
+                                    {subCat?.name}
+                                  </div>
                                 </Link>
                               );
                             })}
@@ -88,13 +97,19 @@ const Navigation = (props) => {
           >
             <div className="res-nav-overlay" onClick={props.closeNav}></div>
 
-            <ul className="list list-inline ml-auto res-nav" style={{display:"flex", overflow:"auto",}}>
+            <ul
+              className="list list-inline ml-auto res-nav"
+              style={{ display: "flex", overflow: "auto" }}
+            >
               {context.windowWidth < 992 && (
                 <>
                   {context.isLogin !== true && (
-                    <li className="list-inline-item pl-3"  style={{display:"flex"}}>
+                    <li
+                      className="list-inline-item pl-3"
+                      style={{ display: "flex" }}
+                    >
                       <Link href="/signIn">
-                        <Button className="btn-blue btn-round mr-3" >
+                        <Button className="btn-blue btn-round mr-3">
                           Sign In
                         </Button>
                       </Link>
@@ -109,73 +124,80 @@ const Navigation = (props) => {
                   </li>
                 </>
               )}
-             {
-              //  <li className="list-inline-item" onClick={props.closeNav}>
-              //   <Link href="/">
-              //     <Button>Home</Button>
-              //   </Link>
-              // </li>
+              {
+                //  <li className="list-inline-item" onClick={props.closeNav}>
+                //   <Link href="/">
+                //     <Button>Home</Button>
+                //   </Link>
+                // </li>
               }
               <Tabs
-                    variant="scrollable"
-                    scrollButtons="auto"
-                    className="filterTabs "
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-              {props?.navData
-                ?.filter((item, idx) => idx < 8)
-                .map((item, index) => {
-                  return (
-                    <li className="list-inline-item" key={index} style={{paddingBottom:"0px"}}>
-                      <Link
-                        href={`/category/${item?._id}`}
-                        onClick={props.closeNav}
+                variant="scrollable"
+                scrollButtons="auto"
+                className="filterTabs "
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {props?.navData
+                  ?.filter((item, idx) => idx < 8)
+                  .map((item, index) => {
+                    return (
+                      <li
+                        className="list-inline-item"
+                        key={index}
+                        style={{ paddingBottom: "0px" }}
                       >
-                        <Button className="" style={{textWrap:"nowrap"}}>{item?.name}</Button>
-                      </Link>
+                        <Link
+                          href={`/category/${item?._id}`}
+                          onClick={props.closeNav}
+                        >
+                          <Button className="" style={{ textWrap: "nowrap" }}>
+                            {item?.name}
+                          </Button>
+                        </Link>
 
-                      {item?.children?.length !== 0 &&
-                        context.windowWidth < 992 && (
-                          <span className={`arrow ${
+                        {item?.children?.length !== 0 &&
+                          context.windowWidth < 992 && (
+                            <span
+                              className={`arrow ${
                                 isOpenSubMenuIndex === index &&
                                 isOpenSubMenu_ === true &&
                                 "rotate"
                               }`}
                               onClick={() => IsOpenSubMenu(index)}
-                              >
-                            <FaAngleDown />
-                          </span>
-                        )}
+                            >
+                              <FaAngleDown />
+                            </span>
+                          )}
 
-                      {item?.children?.length !== 0 && (
-                        <div
-                          className={`submenu ${
-                            isOpenSubMenuIndex === index &&
-                            isOpenSubMenu_ === true &&
-                            "open"
-                          }`}
-                        >
-                          {item?.children?.map((subCat, key) => {
-                            return (
-                              <Link
-                                href={`/category/subCat/${subCat?._id}`}
-                                key={key}
-                                onClick={props.closeNav}
-                              >
-                                <Button>{subCat?.name}</Button>
-                              </Link>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </li>
-                  );
-                })}
-                </Tabs>
+                        {item?.children?.length !== 0 && (
+                          <div
+                            className={`submenu ${
+                              isOpenSubMenuIndex === index &&
+                              isOpenSubMenu_ === true &&
+                              "open"
+                            }`}
+                          >
+                            {item?.children?.map((subCat, key) => {
+                              return (
+                                <Link
+                                  href={`/category/subCat/${subCat?._id}`}
+                                  key={key}
+                                  onClick={props.closeNav}
+                                >
+                                  <Button>{subCat?.name}</Button>
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
+              </Tabs>
             </ul>
           </div>
         </div>

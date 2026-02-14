@@ -1,20 +1,18 @@
-"use client"
+"use client";
 import { useContext, useEffect, useState } from "react";
-import Logo from "../../assets/images/logo.jpg";
+import Logo from "../../assets/images/logo.svg";
 import { MyContext } from "@/context/ThemeContext";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-
 
 import GoogleImg from "../../assets/images/googleImg.png";
 import CircularProgress from "@mui/material/CircularProgress";
 import { postData } from "@/utils/api";
 
-
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { firebaseApp } from "../firebase";
 import Link from "next/link";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const auth = getAuth(firebaseApp);
@@ -64,7 +62,6 @@ const SignIn = () => {
 
     setIsLoading(true);
     postData("/api/user/signin", formfields).then((res) => {
-        
       try {
         if (res.error !== true) {
           localStorage.setItem("token", res.token);
@@ -106,7 +103,6 @@ const SignIn = () => {
   };
 
   const signInWithGoogle = () => {
-    
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -114,53 +110,53 @@ const SignIn = () => {
         // The signed-in user info.
         const user = result.user;
 
-        const fields={
-            name:user.providerData[0].displayName,
-            email: user.providerData[0].email,
-            password: null,
-            images:user.providerData[0].photoURL,
-            phone:user.providerData[0].phoneNumber
-        }
+        const fields = {
+          name: user.providerData[0].displayName,
+          email: user.providerData[0].email,
+          password: null,
+          images: user.providerData[0].photoURL,
+          phone: user.providerData[0].phoneNumber,
+        };
 
         postData("/api/user/authWithGoogle", fields).then((res) => {
-            try {
-              if (res.error !== true) {
-                localStorage.setItem("token", res.token);
-      
-                const user = {
-                  name: res.user?.name,
-                  email: res.user?.email,
-                  userId: res.user?.id,
-                };
-      
-                localStorage.setItem("user", JSON.stringify(user));
-      
-                context.setAlertBox({
-                  open: true,
-                  error: false,
-                  msg: res.msg,
-                });
-      
-                setTimeout(() => {
-                    history.push("/");
-                  context.setIsLogin(true);
-                  setIsLoading(false);
-                  context.setisHeaderFooterShow(true);
-                  //window.location.href = "/";
-                }, 2000);
-              } else {
-                context.setAlertBox({
-                  open: true,
-                  error: true,
-                  msg: res.msg,
-                });
+          try {
+            if (res.error !== true) {
+              localStorage.setItem("token", res.token);
+
+              const user = {
+                name: res.user?.name,
+                email: res.user?.email,
+                userId: res.user?.id,
+              };
+
+              localStorage.setItem("user", JSON.stringify(user));
+
+              context.setAlertBox({
+                open: true,
+                error: false,
+                msg: res.msg,
+              });
+
+              setTimeout(() => {
+                history.push("/");
+                context.setIsLogin(true);
                 setIsLoading(false);
-              }
-            } catch (error) {
-              console.log(error);
+                context.setisHeaderFooterShow(true);
+                //window.location.href = "/";
+              }, 2000);
+            } else {
+              context.setAlertBox({
+                open: true,
+                error: true,
+                msg: res.msg,
+              });
               setIsLoading(false);
             }
-          });
+          } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+          }
+        });
 
         context.setAlertBox({
           open: true,
@@ -168,7 +164,7 @@ const SignIn = () => {
           msg: "User authentication Successfully!",
         });
 
-       // window.location.href = "/";
+        // window.location.href = "/";
       })
       .catch((error) => {
         // Handle Errors here.
@@ -208,7 +204,13 @@ const SignIn = () => {
       <div className="container">
         <div className="box card p-3 shadow border-0">
           <div className="text-center">
-            <Image src={Logo} alt="image" />
+            <Image
+              src={Logo}
+              alt="logo"
+              width={150}
+              height={150}
+              style={{ maxWidth: "50px", height: "auto" }}
+            />
           </div>
 
           <form className="mt-3" onSubmit={login}>

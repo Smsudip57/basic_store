@@ -73,7 +73,7 @@ const Footer = () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-6">
-                                    <p className="text-white mb-1">$20 discount for your first order</p>
+                                    <p className="text-white mb-1">20% discount for your first order</p>
                                     <h3 className="text-white">Join our newsletter and get...</h3>
                                     <p className="text-light">Join our email subscription now to get updates on<br /> promotions and coupons.</p>
 
@@ -123,7 +123,7 @@ const Footer = () => {
 
 
                             <div className="row mt-5 linksWrap">
-                                {context.categoryData.length !== 0 && context.categoryData.map((item, index) => (
+                                {context?.categoryData?.length !== 0 && context?.categoryData?.map((item, index) => (
                                     <div className="col" key={index}>
                                     <h5 className='uppercase cursor-pointer'><Link href={`/category/${item._id}`} style={{textDecoration:"none", color:"#7A55C1"}}>{item.name}</Link></h5>
                                     {/* <ul>
